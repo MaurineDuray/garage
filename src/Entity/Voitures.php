@@ -55,6 +55,7 @@ class Voitures
     private ?string $transmission = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(min:20, minMessage: "La description doit faire plus de 20 caractères")]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]

@@ -46,14 +46,19 @@ body {
 .card{
     
     padding:30px;
+    border:rgb(255, 170, 22) 2px solid; 
 }
 
 h2{
     font-family: 'Barlow', sans-serif;
-    font-size: 120px;
+    font-size: 200px;
     font-family: 'Rancho', cursive;
+    color: rgb(255, 170, 22);
 }
-
+.gal{
+    background-color: rgb(43, 43, 43);
+    margin-top: 20px;
+}
 #garage1{
     height: 40vh;
     background-image: url(/assets/images/garage1.jpg);
@@ -82,10 +87,10 @@ h2{
 
 #address{
     padding-bottom: 25px;
-   
     padding-top: 30px;
     width: 100%;
     text-align: center;
+    background-color:rgba(255, 170, 22, 0.877);
 }
 
 /********showroom*********/
