@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Informations de {{voiture.marque}} {{voiture.modele}}{% endblock %}
+
+{% block body %}
+    <div class="annonce-title" style="background-image: url({{voiture.image}})" id="pres">
+        <h2>Informations sur le véhicule
+       <br>{{voiture.marque}} - {{voiture.modele}}</h2>
+
+    </div>
+
+    <div class="slide">
+        <div class="container">
+        <div class="row">
+            <div class="col-5">
+            <h2>Galerie</h2>
+            </div>
+            <div class="card col-7" id="ficheInfo">
+                <h3>Fiche info du véhicule</h3>
+                <p><u>Marque du véhicule :</u> {{voiture.marque}}</p> 
+                <p><u>Modèle du véhicule :</u> {{voiture.modele}}</p> 
+                <p><u>Kilométrage du véhicule :</u> {{voiture.km}} kilomètres</p> 
+                <p><u>Prix de vente :</u> {{voiture.prix}} €</p> 
+                <p><u>Nombre de propriétaire(s) du véhicule :</u> {{voiture.nbProprio}} propriétaire(s)</p> 
+                <p><u>Cylindrée :</u> {{voiture.cylindree}} cylindres</p> 
+                <p><u>Puissance :</u> {{voiture.puissance}} chevaux</p> 
+                <p><u>Carburant :</u> {{voiture.carburant}}</p> 
+                <p><u>Année de mise en circulation :</u><br></p> 
+                <p><u>Transmission :</u> Transmission {{voiture.transmission}}</p> 
+                <p><u>Description :</u><br>{{voiture.description}}</p> 
+                <p><u>Options :</u><br>
+                    <li>{{voiture.options}}</li>
+                    <li>{{voiture.options}}</li>
+                    <li>{{voiture.options}}</li>
+                </p> 
+            </div>
+            </div>
+        </div>
+       
+    </div>
+{% endblock %}

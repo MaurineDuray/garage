@@ -2,10 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\VoituresRepository;
+use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\VoituresRepository;
 
+#[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: VoituresRepository::class)]
 class Voitures
 {
@@ -52,6 +54,18 @@ class Voitures
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $options = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function initializeSlug():void{
+        if (empty($this->slug)){
+            $slugify = new Slugify();
+            $this->slug = $slugify->slugify($this->id.''.$this->marque.''.$this->modele);
+        }
+    }
 
     public function getId(): ?int
     {
@@ -210,6 +224,18 @@ class Voitures
     public function setOptions(string $options): self
     {
         $this->options = $options;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

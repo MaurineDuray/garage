@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue au showroom{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="slide" id="show">
+    <h1>Bienvenue au showroom !</h1>
+</div>
+
+<div class="slide" id="recent" >
+    <div class="container">
+         <h2>Bonne visite sur notre showroom online !</h2>
+         <div class="row">
+            {% for voiture in voitures %}
+                <div class="col-md-6">
+                    <div class="cartes card bg-light mb-3">
+                        <a href="{{voiture.image}}">
+                        
+                        {% set url = path('voitures_show', {'slug':voiture.slug}) %}
+
+                            <img class=" starsimg" src="https://picsum.photos/300/200" alt="image de l'annonce {{voiture.marque}} {{voiture.modele}}">
+                        </a>
+                        <div class="card-body text-center">
+                            {{voiture.marque}}  <br><strong><i>{{voiture.modele}}</i></strong>
+                            <br>Kilomètrage : {{voiture.km}} KM
+                            <br><div class="prix">{{voiture.prix}} €</div>
+                            <br>
+                            <a href="{{url}}" id="enplus" class="btn btn-warning"> En savoir plus </a>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            {% endfor %}
+         </div>
+    </div>
+   
+</div>
+
+{% endblock %}
