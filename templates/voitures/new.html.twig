@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'une voiture au garage{% endblock %}
+
+{% form_theme myform 'bootstrap_5_layout.html.twig' %}
+{% block body %}
+
+    <div class="container">
+        <h1>Ajout d'une nouvelle voiture au garage</h1>
+        {{form_start(myform)}}
+            <div class="container">
+                <div>
+                    {{form_widget(myform)}}
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Création d'une annonce</button>
+        {{form_end(myform)}}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{encore_entry_script_tags('voitures')}}
+{% endblock %}
