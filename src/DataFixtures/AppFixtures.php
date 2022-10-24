@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
+use App\Entity\Image;
 use App\Entity\Voitures;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -53,5 +54,14 @@ class AppFixtures extends Fixture
 
         }
         $manager->flush();
+
+        for($j=1; $j<=rand(2,5) ; $j++)
+            {
+                $image = new Image();
+                $image ->setUrl('https://picsum.photos/200/200')
+                    ->setCaption($faker->sentence())
+                    ->setVoiture($voiture);
+                $manager->persist($image);
+            }
     }
 }

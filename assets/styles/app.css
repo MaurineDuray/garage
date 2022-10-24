@@ -171,6 +171,12 @@ h2{
 }
 #ficheInfo{
     margin-top : 30px;
+    margin-bottom: 30px;
+}
+
+.galery{
+    display: flex;
+    align-items: center;
 }
 
 
