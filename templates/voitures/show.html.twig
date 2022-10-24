@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-5">
             <h2>Galerie</h2>
-            <div class="bd-example">
+            {# <div class="bd-example">
                     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
                         <div class="carousel-indicators">
                          {% for image in voiture.images %}
@@ -43,8 +43,8 @@
                             <span class="visually-hidden">Next</span>
                         </button>
                     </div>
-                </div>
-            </div>
+                </div>#}
+            </div> 
             <div class="card col-7" id="ficheInfo">
                 <h3>Fiche info du véhicule</h3>
                 <p><u>Marque du véhicule :</u> {{voiture.marque}}</p> 
@@ -55,7 +55,7 @@
                 <p><u>Cylindrée :</u> {{voiture.cylindree}} cylindres</p> 
                 <p><u>Puissance :</u> {{voiture.puissance}} chevaux</p> 
                 <p><u>Carburant :</u> {{voiture.carburant}}</p> 
-                <p><u>Année de mise en circulation :</u><br></p> 
+                <p><u>Année de mise en circulation :</u> {{voiture.annee}}<br></p> 
                 <p><u>Transmission :</u> Transmission {{voiture.transmission}}</p> 
                 <p><u>Description :</u><br>{{voiture.description}}</p> 
                 <p><u>Options :</u><br>

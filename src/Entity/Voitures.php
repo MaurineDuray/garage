@@ -6,6 +6,7 @@ use Cocur\Slugify\Slugify;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\VoituresRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: VoituresRepository::class)]
@@ -17,12 +18,16 @@ class Voitures
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:2, max:255, minMessage: "La marque doit faire plus de 2 caractères", maxMessage:'Le titre ne doit pas faire plus de 255 caractères ')]
     private ?string $marque = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:2, max:255, minMessage: "Le modèle doit faire plus de 2 caractères", maxMessage:'Le titre ne doit pas faire plus de 255 caractères ')]
     private ?string $modele = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Image(mimeTypes:["image/png","image/jpeg","image/jpg","image/gif"], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg, png ou gif")]
+    #[Assert\File(maxSize:"3024k", maxSizeMessage:"La taille du fichier est trop grande")]
     private ?string $image = null;
 
     #[ORM\Column]
@@ -43,8 +48,8 @@ class Voitures
     #[ORM\Column(length: 255)]
     private ?string $carburant = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $annee = null;
+    #[ORM\Column]
+    private ?int $annee = null;
 
     #[ORM\Column(length: 255)]
     private ?string $transmission = null;
@@ -180,12 +185,12 @@ class Voitures
         return $this;
     }
 
-    public function getAnnee(): ?\DateTimeInterface
+    public function getAnnee():?int
     {
         return $this->annee;
     }
 
-    public function setAnnee(\DateTimeInterface $annee): self
+    public function setAnnee(int $annee): self
     {
         $this->annee = $annee;
 

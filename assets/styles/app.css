@@ -150,11 +150,12 @@ h2{
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    font-size: 40pt !important;
 }
 
 .annonce-title h2{
     width:100%;
-
+    font-size: 40pt !important;
 }
 
 

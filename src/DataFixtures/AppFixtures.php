@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
            
             $modele = $faker->randomElement($modeles);
             $carburant = $faker->randomElement($carburants);
-            $date = $faker->dateTime();
+           
             $transmission= $faker->randomElement($transmissions);
             $description = $faker->paragraph(2);
             $options = $faker->sentence();
@@ -42,7 +42,7 @@ class AppFixtures extends Fixture
                 ->setCylindree(rand(1,4))
                 ->setPuissance(rand(1,200))
                 ->setCarburant($carburant)
-                ->setAnnee($date)
+                ->setAnnee(rand(1885,2030))
                 ->setTransmission($transmission)
                 ->setDescription($description)
                 ->setOptions($options)
