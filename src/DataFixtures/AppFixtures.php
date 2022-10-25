@@ -36,7 +36,7 @@ class AppFixtures extends Fixture
 
             $voiture->setMarque($marque)
                 ->setModele($modele)
-                ->setImage('https://picsum.photos/cars/1000/350')
+                ->setImage('https://picsum.photos/1000/350')
                 ->setKm(rand(0,50000))
                 ->setPrix(rand(5000,120000))
                 ->setNbProprio(rand(1,5))
@@ -55,13 +55,13 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        for($j=1; $j<=rand(2,5) ; $j++)
-            {
-                $image = new Image();
-                $image ->setUrl('https://picsum.photos/200/200')
-                    ->setCaption($faker->sentence())
-                    ->setVoiture($voiture);
-                $manager->persist($image);
-            }
+        // for($j=1; $j<=rand(2,5) ; $j++)
+        //     {
+        //         $image = new Image();
+        //         $image ->setUrl('https://picsum.photos/200/200')
+        //             ->setCaption($faker->sentence())
+        //             ->setVoiture($voiture);
+        //         $manager->persist($image);
+        //     }
     }
 }

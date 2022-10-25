@@ -28,7 +28,8 @@ class Voitures
     private ?string $modele = null;
 
     #[ORM\Column(length: 255)]
-   
+    #[Assert\Image(mimeTypes:["image/png","image/jpeg","image/jpg","image/gif"], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg, png ou gif")]
+    #[Assert\File(maxSize:"3024k", maxSizeMessage:"La taille du fichier est trop grande")]
     private ?string $image = null;
 
     #[ORM\Column]
@@ -49,7 +50,7 @@ class Voitures
     #[ORM\Column(length: 255)]
     private ?string $carburant = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $annee = null;
 
     #[ORM\Column(length: 255)]
@@ -80,7 +81,7 @@ class Voitures
     public function initializeSlug():void{
         if (empty($this->slug)){
             $slugify = new Slugify();
-            $this->slug = $slugify->slugify($this->id.''.$this->marque.''.$this->modele);
+            $this->slug = $slugify->slugify($this->marque.''.$this->modele.''.$this->km);
         }
     }
 

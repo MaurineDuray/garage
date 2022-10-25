@@ -19,11 +19,12 @@
             {% for voiture in voitures %}
                 <div class="col-md-6">
                     <div class="cartes card bg-light mb-3">
-                        <a href="{{voiture.image}}">
+                        
                         
                         {% set url = path('voitures_show', {'slug':voiture.slug}) %}
-
-                            <img class=" starsimg" src="https://picsum.photos/300/200" alt="image de l'annonce {{voiture.marque}} {{voiture.modele}}">
+                            <div class="vignette">
+                                <img class=" starsimg" src="../uploads/{{voiture.image}}" alt="image de l'annonce {{voiture.marque}} {{voiture.modele}}">
+                            </div>
                         </a>
                         <div class="card-body text-center">
                             {{voiture.marque}}  <br><strong><i>{{voiture.modele}}</i></strong>

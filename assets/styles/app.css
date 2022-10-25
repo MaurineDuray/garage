@@ -141,11 +141,22 @@ h2{
 .card-body{
     font-size: 18pt;
 }
+.vignette{
+    width: 100%;
+    height:250px;
+    overflow: hidden;
+}
+.vignette img{
+    width: fit-content;
+    height: 100%;
 
+    margin-left: 50%;
+    transform: translateX(-50%)
+}
 /**********Voiture individuel**************/
 .annonce-title{
     width: 100%;
-    margin-top:0 !important;
+    margin-top:-50px !important;
     height:40vh;
     background-size: cover;
     background-repeat: no-repeat;
@@ -161,6 +172,18 @@ h2{
 .annonce-title h2{
     width:100%;
     font-size: 40pt !important;
+    position: absolute;
+    background-color: rgba(240, 248, 255, 0.717);
+    color: black;
+}
+.annonce-title .cover{
+    width: 100%;
+    height: 30vh;
+    overflow: hidden;
+}
+.cover img{
+    width: 100%;
+   
 }
 
 

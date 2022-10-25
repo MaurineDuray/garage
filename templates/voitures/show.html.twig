@@ -3,17 +3,20 @@
 {% block title %} Informations de {{voiture.marque}} {{voiture.modele}}{% endblock %}
 
 {% block body %}
-    <div class="annonce-title" style="background-image: url("{{voiture.image}}")" id="pres">
+    <div class="annonce-title"  id="pres">
         <h2>Informations sur le véhicule:
-       <br>- {{voiture.marque}} - <i>{{voiture.modele}}</i> -</h2>
-
+        <br>- {{voiture.marque}} - <i>{{voiture.modele}}</i> -</h2>
+        <div class="cover">
+            <img src="../uploads/{{voiture.image}}" alt="">
+        </div>
+        
     </div>
 
     
         <div class="container">
             <div class="row">
                 <div class=" galery col-5 align-items-center">
-            
+                <h2>Galerie</h2>
                     <div class="bd-example">
                         <div id="carouselExampleCaptions" class="carousel" data-bs-ride="false">
                             <div class="carousel-indicators">
@@ -23,12 +26,12 @@
                             
                             </div>
                             <div class="carousel-inner">
-                                {% for image in voiture.images %}
+                                {% for image in voiture.image %}
                                     <div class="carousel-item {% if loop.first %}active{% endif %}">
-                                        <img src="https://picsum.photos/500/500" class="d-block w-100" alt="image de {{voiture.marque}}">
+                                        <img src="../uploads/{{voiture.image}}" class="d-block w-100" alt="image de {{voiture.marque}}">
                                         <div class="carousel-caption d-none d-md-block">
                                                 <h5>{{voiture.marque}}</h5>
-                                                <p>{{image.caption}}</p>
+                                                <p>{{images.caption}}</p>
                                         </div>
                                     </div>
                                 {% endfor %}
