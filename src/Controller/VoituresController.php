@@ -56,7 +56,7 @@ class VoituresController extends AbstractController
             }
 
             /**Gestion des images de la galerie */
-            foreach($voiture->getImages() as $image){
+            foreach($voiture->getImages() as $fichier){
                 $fichier = $form['images']->getData();
                 if(!empty($fichier))
                 {
@@ -64,7 +64,7 @@ class VoituresController extends AbstractController
                     $safeFilename =transliterator_transliterate('Any-Latin;Latin-ASCII;[^A-Za-z0-9_]remove;Lower()', $originalFilename);
                     $newFilename =$safeFilename."-".uniqid().".".$fichier->guessExtension();
                     try{
-                        $file->move(
+                        $fichier->move(
                             $this->getParameter('uploads_directory'),
                             $newFilename
                         );
@@ -72,11 +72,11 @@ class VoituresController extends AbstractController
                     {
                         return $e->getMessage();
                     }
-                    $voiture->setImage($newFilename);
+                    $voiture->addImage($fichier);
                 }
 
-                $image->setVoiture($voiture);
-                $manager->persist($image);
+                $fichier->setVoiture($voiture);
+                $manager->persist($fichier);
 
 
             }

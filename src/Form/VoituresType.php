@@ -21,7 +21,7 @@ class VoituresType extends ApplicationType
             ->add('marque',TextType::class, $this->getConfiguration('Marque du véhicule', "Marque du véhicule"))
             ->add('modele',TextType::class, $this->getConfiguration('Modèle du véhicule', "Modèle du véhicule"))
             ->add('image', FileType::class,[
-                'label'=>"Image (jpg,pgn,gif)",
+                'label'=>"Image de couverture (jpg,pgn,gif)",
             ])
 
             ->add('km',IntegerType::class,$this->getConfiguration('Nombre de kilomètres', "Donnez le nombre de kilomètres au compteur"))
