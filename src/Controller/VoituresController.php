@@ -64,20 +64,23 @@ class VoituresController extends AbstractController
                     if(!empty($picture))
                     {
                         $originalFilename = pathinfo($picture->getClientOriginalName(),PATHINFO_FILENAME);
-                    $safeFilename = transliterator_transliterate('Any-Latin;Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                    $newFilename = $safeFilename."-".uniqid().".".$picture->guessExtension();
-                    try{
-                        $picture->move(
-                            $this->getParameter('uploads_directory'),
-                            $newFilename
-                        );
-                    }catch(FileException $e)
-                    {
-                        return $e->getMessage();
-                    }
-                    $voiture->addPicture($picture);
-                    $picture->setVoitureId($voiture);
-                    $manager->persist($picture);
+                        $safeFilename = transliterator_transliterate('Any-Latin;Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                        $newFilename = $safeFilename."-".uniqid().".".$picture->guessExtension();
+                        try{
+                            $picture->move(
+                                $this->getParameter('uploads_directory'),
+                                $newFilename
+                            );
+                        }catch(FileException $e)
+                        {
+                            return $e->getMessage();
+                        }
+
+                        $voiture->addPicture($picture);
+                        $picture->setVoitureId($voiture);
+                        $picture->setFile($newFilename);
+                        
+                        $manager->persist($picture);
                     }
                     
                 
