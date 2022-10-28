@@ -39,11 +39,12 @@ class VoituresType extends ApplicationType
             ]))
             ->add(
                 'images',
-                CollectionType::class,
+                FileType::class,
                 [
-                    'entry_type' => ImageType::class,
-                    'allow_add' => true, // permet d'ajouter des éléments et surtout avoir data_prototype
-                    'allow_delete' => true
+                    'label'=>false,
+                    'multiple'=>true,
+                    'mapped'=>false,
+                    
                 ]
             )
             ;
