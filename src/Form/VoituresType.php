@@ -38,7 +38,7 @@ class VoituresType extends ApplicationType
                 'required' => false
             ]))
             ->add(
-                'images',
+                'pictures',
                 FileType::class,
                 [
                     'label'=>false,

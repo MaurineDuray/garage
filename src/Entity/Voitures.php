@@ -68,13 +68,15 @@ class Voitures
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\OneToMany(mappedBy: 'voiture', targetEntity: Image::class),]
-    private Collection $images;
+    #[ORM\OneToMany(mappedBy: 'voitureId', targetEntity: Pictures::class)]
+    private Collection $pictures;
 
     public function __construct()
     {
-        $this->images = new ArrayCollection();
+        $this->pictures = new ArrayCollection();
     }
+
+    
 
    
 
@@ -261,34 +263,38 @@ class Voitures
     }
 
     /**
-     * @return Collection<int, Image>
+     * @return Collection<int, Pictures>
      */
-    public function getImages(): Collection
+    public function getPictures(): Collection
     {
-        return $this->images;
+        return $this->pictures;
     }
 
-    public function addImage(Image $image): self
+    public function addPicture(Pictures $picture): self
     {
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
-            $image->setVoiture($this);
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures->add($picture);
+            $picture->setVoitureId($this);
         }
 
         return $this;
     }
 
-    public function removeImage(Image $image): self
+    public function removePicture(Pictures $picture): self
     {
-        if ($this->images->removeElement($image)) {
+        if ($this->pictures->removeElement($picture)) {
             // set the owning side to null (unless already changed)
-            if ($image->getVoiture() === $this) {
-                $image->setVoiture(null);
+            if ($picture->getVoitureId() === $this) {
+                $picture->setVoitureId(null);
             }
         }
 
         return $this;
     }
+
+    
+
+    
 
    
 }

@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Controller;
-use App\Entity\Image;
 
-
+use App\Entity\Pictures;
 use App\Entity\Voitures;
 use App\Form\VoituresType;
 use App\Repository\VoituresRepository;
@@ -58,27 +57,36 @@ class VoituresController extends AbstractController
             }
 
             /**Gestion des images de la galerie */
-            $images = $form->get('images')->getData();
-            foreach($images as $image){
-                
-                $fichier = md5(uniqid()).'.'.$image->guessExtension();
-
-                $image->move(
-                    $this->getParameter('uploads_directory'),
-                    $fichier
-                );
-
-                $img = new Image();
-                $img->setUrl($fichier);
-                $voiture->addImage($img);
-
-
-            }
-            /*** */
-           
-            $manager->persist($voiture);
+            $picture = $form['pictures']->getData();
             
-            $manager->flush($voiture);
+                foreach($voiture->getPictures() as $picture){
+                    $picture = $form['picture']->getData();
+                    if(!empty($picture))
+                    {
+                        $originalFilename = pathinfo($picture->getClientOriginalName(),PATHINFO_FILENAME);
+                    $safeFilename = transliterator_transliterate('Any-Latin;Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+                    $newFilename = $safeFilename."-".uniqid().".".$picture->guessExtension();
+                    try{
+                        $picture->move(
+                            $this->getParameter('uploads_directory'),
+                            $newFilename
+                        );
+                    }catch(FileException $e)
+                    {
+                        return $e->getMessage();
+                    }
+                    $voiture->addPicture($picture);
+                    $picture->setVoitureId($voiture);
+                    $manager->persist($picture);
+                    }
+                    
+                
+                }
+            /*** */
+
+            $manager->persist($voiture);
+            $manager->flush();
+
 
             $this->addFlash(
                 'success',
