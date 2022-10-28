@@ -36,7 +36,7 @@ class VoituresController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            
+            /**Gestion de l'image de couverture */
             $file = $form['image']->getData();
             if(!empty($file))
             {
@@ -54,6 +54,33 @@ class VoituresController extends AbstractController
                 }
                 $voiture->setImage($newFilename);
             }
+
+            /**Gestion des images de la galerie */
+            foreach($voiture->getImages() as $image){
+                $fichier = $form['images']->getData();
+                if(!empty($fichier))
+                {
+                    $originalFilename = pathinfo($fichier->getClientOriginalName(),PATHINFO_FILENAME);
+                    $safeFilename =transliterator_transliterate('Any-Latin;Latin-ASCII;[^A-Za-z0-9_]remove;Lower()', $originalFilename);
+                    $newFilename =$safeFilename."-".uniqid().".".$fichier->guessExtension();
+                    try{
+                        $file->move(
+                            $this->getParameter('uploads_directory'),
+                            $newFilename
+                        );
+                    }catch(FileException $e)
+                    {
+                        return $e->getMessage();
+                    }
+                    $voiture->setImage($newFilename);
+                }
+
+                $image->setVoiture($voiture);
+                $manager->persist($image);
+
+
+            }
+            /*** */
 
             $manager->persist($voiture);
             $manager->flush();

@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 
 class VoituresType extends ApplicationType
 {
@@ -21,11 +22,10 @@ class VoituresType extends ApplicationType
             ->add('modele',TextType::class, $this->getConfiguration('Modèle du véhicule', "Modèle du véhicule"))
             ->add('image', FileType::class,[
                 'label'=>"Image (jpg,pgn,gif)",
-                "required"=>false
             ])
 
             ->add('km',IntegerType::class,$this->getConfiguration('Nombre de kilomètres', "Donnez le nombre de kilomètres au compteur"))
-            ->add('prix', IntegerType::class,$this->getConfiguration('Prix', "Donnez le prix du véhicule"))
+            ->add('prix', MoneyType::class,$this->getConfiguration('Prix', "Donnez le prix du véhicule"))
             ->add('nbProprio',IntegerType::class,$this->getConfiguration('Nombre de proprio', "Donnez le nombre de prorio qui ont eu le véhicule"))
             ->add('cylindree',IntegerType::class,$this->getConfiguration('Nombre de cylindres', "Donnez le nombre de cylindres (de 1 à 4)"))
             ->add('puissance',IntegerType::class,$this->getConfiguration('Nombre de chevaux', "Donnez le nombre de cheveaux du véhicule (max:200)"))
@@ -34,7 +34,7 @@ class VoituresType extends ApplicationType
             ->add('transmission',TextType::class, $this->getConfiguration('Transmission', "Donnez le type de transmission du véhicule: automatique, manuelle"))
             ->add('description',TextType::class, $this->getConfiguration('Description', "Donnez une description du véhicule"))
             ->add('options',TextType::class, $this->getConfiguration('options', "Listez les ottions du véhicule"))
-            ->add('slug',TextType::class, $this->getConfiguration('Slug (optionnel)', 'Adresse web (automatique)',[
+            ->add('slug', TextType::class, $this->getConfiguration('Slug', 'Adresse web (automatique)',[
                 'required' => false
             ]))
             ->add(
@@ -45,7 +45,8 @@ class VoituresType extends ApplicationType
                     'allow_add' => true, // permet d'ajouter des éléments et surtout avoir data_prototype
                     'allow_delete' => true
                 ]
-            );
+            )
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
