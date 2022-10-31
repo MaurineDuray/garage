@@ -6,7 +6,7 @@ addImage.addEventListener('click',()=>{
     // compter combien j'ai de form-group pour les indices ex: annonce_image_0_url
     const widgetCounter = document.querySelector("#widgets-counter")
     const index = +widgetCounter.value // le + permet de transofmer en nombre, value rends tjrs un string 
-    const annonceImages = document.querySelector('#voitures_images')
+    const annonceImages = document.querySelector('#voitures_pictures')
 
     //recup le prototype des entrées data-prototype
     const prototype = annonceImages.dataset.prototype.replace(/__name__/g, index) // drapeau g pour indiquer que l'on va le faire plusieurs fois 
@@ -19,7 +19,7 @@ addImage.addEventListener('click',()=>{
 })
 
 const updateCounter = () => {
-    const count = document.querySelectorAll('#voitures_images div.form-group').length
+    const count = document.querySelectorAll('#voitures_pictures div.form-group').length
     document.querySelector('#widgets-counter').value = count
 }
 

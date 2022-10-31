@@ -57,34 +57,23 @@ class VoituresController extends AbstractController
             }
 
             /**Gestion des images de la galerie */
-            $picture = $form['pictures']->getData();
-            
-                foreach($voiture->getPictures() as $picture){
-                    $picture = $form['picture']->getData();
-                    if(!empty($picture))
-                    {
-                        $originalFilename = pathinfo($picture->getClientOriginalName(),PATHINFO_FILENAME);
-                        $safeFilename = transliterator_transliterate('Any-Latin;Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-                        $newFilename = $safeFilename."-".uniqid().".".$picture->guessExtension();
-                        try{
-                            $picture->move(
-                                $this->getParameter('uploads_directory'),
-                                $newFilename
-                            );
-                        }catch(FileException $e)
-                        {
-                            return $e->getMessage();
-                        }
+           if($form->isSubmitted() && $form->isValid()){
+            foreach($voiture->getPictures() as $picture){
+                $picture= $form['pictures']->getData();
 
-                        $voiture->addPicture($picture);
-                        $picture->setVoitureId($voiture);
-                        $picture->setFile($newFilename);
-                        
-                        $manager->persist($picture);
-                    }
+                if(!empty($picture)){
+                    $originalPicturename = pathinfo($picture->getClientOriginalName(),PATHINFO_FILENAME);
+                    $safePictureName =  transliterator_transliterate('Any-Latin;Latin-ASCII;[^A-Za-z0-9_]remove;Lower()', $originalPicturename);
+                    $newPicturename = $safePictureName."-".uniqid().".".$picture->guessExtension();
                     
-                
+                    $picture->setFile($newPicturename);
+
+                    $picture->setVoitureId($voiture);
+                    $manager->persist($picture);
+                    }
                 }
+                
+           }
             /*** */
 
             $manager->persist($voiture);

@@ -2,16 +2,18 @@
 
 namespace App\Form;
 
-use App\Form\ImageType;
+
 use App\Entity\Voitures;
 
+use App\Form\PicturesType;
+use App\Form\ApplicationType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class VoituresType extends ApplicationType
 {
@@ -39,11 +41,12 @@ class VoituresType extends ApplicationType
             ]))
             ->add(
                 'pictures',
-                FileType::class,
+                CollectionType::class,
                 [
-                    'label'=>false,
-                    'multiple'=>true,
-                    'mapped'=>false,
+                    'entry_type'=> PicturesType::class,
+                    'allow_add'=>true,
+                    'allow_delete'=>true,
+                    
                     
                 ]
             )
