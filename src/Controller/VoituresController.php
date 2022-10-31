@@ -57,10 +57,8 @@ class VoituresController extends AbstractController
             }
 
             /**Gestion des images de la galerie */
-            $pictures = $form['pictures']->getData();
-            foreach($pictures as $picture){
-                $fichier = $form['pictures']->getData();
-                
+            
+            foreach($voiture->getPictures() as $picture){
                    
                 $picture->setVoitureId($voiture);
                 $manager->persist($picture);   

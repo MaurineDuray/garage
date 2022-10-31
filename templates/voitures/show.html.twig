@@ -14,10 +14,11 @@
 
     
         <div class="container">
-            <div class="row">
-                <div class=" galery col-5 align-items-center">
+            <div class="row align-items-center">
+                <div class=" galery col-md-7 align-items-center">
                 
                     <div class="bd-example">
+                    <h3>Galerie d'images du véhicule</h3>
                         <div id="carouselExampleCaptions" class="carousel" data-bs-ride="false">
                             <div class="carousel-indicators">
                             {% for picture in voiture.pictures %}
@@ -28,7 +29,7 @@
                             <div class="carousel-inner">
                                 {% for picture in voiture.pictures %}
                                     <div class="carousel-item {% if loop.first %}active{% endif %}">
-                                        <img src="../uploads/{{picture.file}}" class="d-block w-100" alt="image de {{voiture.marque}}">
+                                        <img src="{{picture.file}}" class="d-block w-100" alt="image de {{voiture.marque}}">
                                         <div class="carousel-caption d-none d-md-block">
                                                 <h5>{{voiture.marque}}</h5>
                                                 <p>{{picture.caption}}</p>
@@ -50,26 +51,44 @@
                 </div>
             
             </div> 
-            <div class="card col-7" id="ficheInfo">
+            <div class="col-md-5 " id="ficheInfo">
                 <h3>Fiche info du véhicule</h3>
-                <p><u>Marque du véhicule :</u> {{voiture.marque}}</p> 
-                <p><u>Modèle du véhicule :</u> {{voiture.modele}}</p> 
-                <p><u>Kilométrage du véhicule :</u> {{voiture.km}} kilomètres</p> 
-                <p><u>Prix de vente :</u> {{voiture.prix}} €</p> 
-                <p><u>Nombre de propriétaire(s) du véhicule :</u> {{voiture.nbProprio}} propriétaire(s)</p> 
-                <p><u>Cylindrée :</u> {{voiture.cylindree}} cylindres</p> 
-                <p><u>Puissance :</u> {{voiture.puissance}} chevaux</p> 
-                <p><u>Carburant :</u> {{voiture.carburant}}</p> 
-                <p><u>Année de mise en circulation :</u> {{voiture.annee}}<br></p> 
-                <p><u>Transmission :</u> Transmission {{voiture.transmission}}</p> 
-                <p><u>Description :</u><br>{{voiture.description}}</p> 
-                <p><u>Options :</u><br>
-                    <li>{{voiture.options}}</li>
-                    <li>{{voiture.options}}</li>
-                    <li>{{voiture.options}}</li>
+                <div class="card infoP">
+                    <h3>Informations principales</h3>
+                    <p class="marque"><u>Marque du véhicule :</u> <br>{{voiture.marque}}</p> 
+                    <p class="model"><u>Modèle du véhicule :</u><br> {{voiture.modele}}</p> 
+                    <p class="km"><u>Kilométrage du véhicule :</u> {{voiture.km}} kilomètres</p> 
+                    <p class="price"><u>Prix de vente :</u> {{voiture.prix}} €</p> 
+                    <button class="btn-warning btn">Nous contacter</button>
+                </div>
+                
+                
+                  
                 </p> 
             </div>
             </div>
+            <hr>
+        </div>
+             
+        <div class="container description">
+        <div class="row justify-content-center">
+            <div class="card col-md-4 my-3 ">
+                    <h3>Caractéristiques</h3>
+                    <p><u>Nombre de propriétaire(s) du véhicule :</u><br> {{voiture.nbProprio}} propriétaire(s)</p> 
+                    <p><u>Cylindrée :</u> {{voiture.cylindree}} cm3</p> 
+                    <p><u>Puissance :</u> {{voiture.puissance}} chevaux</p> 
+                    <p><u>Carburant :</u> {{voiture.carburant}}</p> 
+                    <p><u>Année de mise en circulation :</u> {{voiture.annee}}<br></p> 
+                    <p><u>Transmission :</u> Boîte {{voiture.transmission}}</p> 
+                </div>
+            <div class="card infoSup col-md-7 my-3">
+            <h3>Informations supplémentaires</h3>
+                <p><u><b>Description :</b></u><br>{{voiture.description}}</p> 
+                <p><u>Options :</u><br>
+                    <li>{{voiture.options}}</li>
+            </div>
+        </div>
+           
         </div>
        
     
