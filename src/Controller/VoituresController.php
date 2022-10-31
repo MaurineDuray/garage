@@ -57,23 +57,17 @@ class VoituresController extends AbstractController
             }
 
             /**Gestion des images de la galerie */
-           if($form->isSubmitted() && $form->isValid()){
-            foreach($voiture->getPictures() as $picture){
-                $picture= $form['pictures']->getData();
-
-                if(!empty($picture)){
-                    $originalPicturename = pathinfo($picture->getClientOriginalName(),PATHINFO_FILENAME);
-                    $safePictureName =  transliterator_transliterate('Any-Latin;Latin-ASCII;[^A-Za-z0-9_]remove;Lower()', $originalPicturename);
-                    $newPicturename = $safePictureName."-".uniqid().".".$picture->guessExtension();
-                    
-                    $picture->setFile($newPicturename);
-
-                    $picture->setVoitureId($voiture);
-                    $manager->persist($picture);
-                    }
-                }
+            $pictures = $form['pictures']->getData();
+            foreach($pictures as $picture){
+                $fichier = $form['pictures']->getData();
                 
-           }
+                   
+                $picture->setVoitureId($voiture);
+                $manager->persist($picture);   
+            }
+                
+                
+           
             /*** */
 
             $manager->persist($voiture);

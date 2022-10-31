@@ -68,7 +68,7 @@ class Voitures
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\OneToMany(mappedBy: 'voitureId', targetEntity: Pictures::class)]
+    #[ORM\OneToMany(mappedBy: 'voitureId', targetEntity: Pictures::class, )]
     private Collection $pictures;
 
     public function __construct()
