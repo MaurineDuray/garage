@@ -12,6 +12,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class PicturesType extends AbstractType
 {
+    /**
+     * Construit la partie de formulaire pour l'ajout d'une image à la galerie photo du véhicule
+     *
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

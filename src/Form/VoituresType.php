@@ -17,6 +17,13 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class VoituresType extends ApplicationType
 {
+    /**
+     * Création du formulaire d'ajout d'un véhicule ua showroom, on utilise getConfiguration pour faciliter la mise en page du formulaire (Application Type)
+     * 
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

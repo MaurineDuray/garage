@@ -11,12 +11,15 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * Création des données factices pour remplir notre bdd pour avoir un aperçu du site "rempli"
+     *
+     * @param ObjectManager $manager
+     * @return void
+     */
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
-
-        // $product = new Product();
-        // $manager->persist($product);
 
         $marques = ['Citroën', 'Peugeot', 'Fiat', 'BMW', 'Mini', 'Jaguar'];
         $modeles=['Boîte à clous', 'Caisse à savons', 'Vieille caisse', 'Vieux broll'];
@@ -53,10 +56,7 @@ class AppFixtures extends Fixture
 
             $manager->persist($voiture);
 
-        }
-        $manager->flush();
-
-        // for($j=1; $j<=rand(2,5) ; $j++)
+             // for($j=1; $j<=rand(2,5) ; $j++)
         //     {
         //         $picture = new Pictures();
         //         $picture ->setFile('https://picsum.photos/200/200')
@@ -64,5 +64,11 @@ class AppFixtures extends Fixture
         //             ->setVoitureId($faker(rand(1,30)));
         //         $manager->persist($picture);
         //     }
+
+       
+        }
+      
+        $manager->flush();
+       
     }
 }

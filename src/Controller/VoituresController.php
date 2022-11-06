@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class VoituresController extends AbstractController
 {
-    /**Afficher l'ensemble des voitures */
+    /**Afficher l'ensemble des voitures du showroom*/
     #[Route('/showroom', name: 'voitures_showroom')]
     public function index(VoituresRepository $repo): Response
     {
@@ -27,6 +27,13 @@ class VoituresController extends AbstractController
         ]);
     }
 
+    /**
+     * Permet d'afficher le formulaire de création de l'ajout d'un véhicule au showroom
+     *
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     #[Route('/showroom/new',name:"voiture_create")]
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
@@ -63,28 +70,34 @@ class VoituresController extends AbstractController
                 $picture->setVoitureId($voiture);
                 $manager->persist($picture);   
             }
+            /*** */    
                 
-                
-           
-            /*** */
-
             $manager->persist($voiture);
             $manager->flush();
 
-
+            /**
+             * Message flash pour alerter l'utilisateur de l'état de la tâche
+             */
             $this->addFlash(
                 'success',
                 "L'annonce <strong>{$voiture->getMarque()} - {$voiture->getModele()}</strong> a bien été enregistrée!"
             );
+
             return $this->redirectToRoute('voitures_show', [
                 'slug' => $voiture->getSlug()
             ]);
         }
+
         return $this->render("voitures/new.html.twig",[
             'myform' => $form->createView()
         ]);
        
     }
+
+    /**
+     * Permet d'afficher une voiture en particulier et ses détails(fiche info)
+     * placée après la fonction pour créer sinon la route peux prendre le /new pour un slug (et ne pas le trouver)
+     */
 
     #[Route('/showroom/{slug}', name:"voitures_show")]
     public function show(string $slug, voitures $voiture):Response
