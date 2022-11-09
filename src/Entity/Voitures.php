@@ -22,40 +22,47 @@ class Voitures
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(min:2, max:255, minMessage: "La marque doit faire plus de 2 caractères", maxMessage:'Le titre ne doit pas faire plus de 255 caractères ')]
+    #[Assert\Length(min:2, max:50, minMessage: "La marque doit faire plus de 2 caractères", maxMessage:'Le titre ne doit pas faire plus de 50 caractères ')]
     private ?string $marque = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(min:2, max:255, minMessage: "Le modèle doit faire plus de 2 caractères", maxMessage:'Le titre ne doit pas faire plus de 255 caractères ')]
+    #[Assert\Length(min:2, max:50, minMessage: "Le modèle doit faire plus de 2 caractères", maxMessage:'Le titre ne doit pas faire plus de 50 caractères ')]
     private ?string $modele = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Image(mimeTypes:["image/png","image/jpeg","image/jpg","image/gif"], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg, png ou gif")]
+    #[Assert\Image(mimeTypes:["image/png","image/jpeg","image/jpg"], mimeTypesMessage:"Vous devez upload un fichier jpg, jpeg ou png")]
     #[Assert\File(maxSize:"3024k", maxSizeMessage:"La taille du fichier est trop grande")]
     private ?string $image = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Vous devez renseigner le nombre de kilomètre du véhicule")]
     private ?int $km = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Vous devez renseigner le prix de vente du véhicule")]
     private ?int $prix = null;
 
     #[ORM\Column]
     private ?int $nbProprio = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Vous devez renseigner le nombre de cylindres de la voiture")]
     private ?int $cylindree = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Vous devez renseigner la puissance du véhicule (n° chevaux)")]
     private ?int $puissance = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Vous devez renseigner le type de carburant accepté par le véhicule")]
     private ?string $carburant = null;
 
     #[ORM\Column(type: Types::INTEGER)]
+    #[Assert\NotBlank(message: "Vous devez renseigner l'année de mise en circulation du véhicule")]
     private ?int $annee = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Vous devez renseigner si le voiture possède une boite manuelle ou automatique")]
     private ?string $transmission = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -76,9 +83,6 @@ class Voitures
         $this->pictures = new ArrayCollection();
     }
 
-    
-
-   
 
     #[ORM\PrePersist]
     #[ORM\PreUpdate]

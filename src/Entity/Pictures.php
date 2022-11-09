@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\PicturesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: PicturesRepository::class)]
 class Pictures
@@ -14,9 +15,11 @@ class Pictures
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Url(message: "Veuillez rendre une url valide")]
     private ?string $file = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:10, max:255, minMessage: "Le titre doit faire plus de 10 caractères", maxMessage:'Le titre ne doit pas faire plus de 255 caractères ')]
     private ?string $caption = null;
 
     #[ORM\ManyToOne(inversedBy: 'pictures')]
