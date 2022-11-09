@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Permet d'afficher la page d'accueil
+ */
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'homepage')]
