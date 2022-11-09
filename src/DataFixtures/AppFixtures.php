@@ -3,14 +3,24 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
+use App\Entity\User;
 use App\Entity\Image;
 use App\Entity\Pictures;
 use App\Entity\Voitures;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    // gestion du hash du password 
+    private $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher)
+    {
+        $this->passwordHasher = $passwordHasher;
+    }
+    
     /**
      * Création des données factices pour remplir notre bdd pour avoir un aperçu du site "rempli"
      *
@@ -20,6 +30,21 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create('fr_FR');
+
+        //création d'un admin 
+        $admin = new User();
+        $admin->setFirstName('Maurine')
+            ->setLastName('Duray')
+            ->setEmail('maurine.duray@proximus.be')
+            ->setPassword($this->passwordHasher->hashPassword($admin, 'password'))
+            ->setIntroduction($faker->sentence())
+            ->setRoles(['ROLE_ADMIN']);
+
+        $manager->persist($admin);
+
+        
+
+        
 
         $marques = ['Renault', 'Peugeot', 'Opel', 'Fiat', 'Mercedes', 'Jaguar', 'Skoda', 'Cadillac', 'Ford'];
         $modeles=['Poussièreuse', 'Caisse à savons', 'Caisse à savon', 'Troies roues', 'Boîte à clous', 'Collection'];

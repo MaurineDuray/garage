@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de {{ user.fullName }}{% endblock %}
+
+{% block body %}
+    <div class="slide container full">
+        <div class="row align-items-center">
+            
+            <div class="col-9 my-4">
+                <h1>{{user.fullName}}</h1>
+                {% if user is same as (app.user) %}
+                    <div>
+                        <a href="{{path('account_profile')}}" class="btn btn-primary mb-2"> Modifier les informations</a>
+                        <a href="{{path('account_password')}}" class="btn btn-warning  mb-2"> Modifier mon mot de passe</a>
+                        
+                    </div>
+                {% endif %}
+                {# ajouter options #}
+            </div>
+        </div>
+        <div class="col-12 my-5">
+            <h2>Description</h2>
+            {{user.introduction | raw | nl2br }}
+        </div>
+        <hr>
+       
+        
+    </div>
+{% endblock %}

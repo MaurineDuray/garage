@@ -20,7 +20,28 @@
         <li class="nav-item">
           <a class="nav-link" href="{{path('voitures_showroom')}}">Showroom</a>
         </li>
-        
+       
+        {% if app.user %}
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="accountDropdownLink">
+                            {{app.user.fullName}}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdownLink">
+                        <a href="{{path('voiture_create')}}" class="dropdown-item">Créer une annonce</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="{{path('account_index')}}" class="dropdown-item">Mon compte</a>
+                        
+                        <div class="dropdown-divider"></div>
+                        <a href="{{path('account_logout')}}" class="dropdown-item">Déconnexion</a>
+                    </div>
+                    </li>
+                    
+            {% else %}
+                    
+                    <li class="nav-item">
+                        <a href="{{path('account_login')}}" class="nav-link">Connexion</a>
+                    </li>  
+            {% endif %}
         
       </ul>
      
