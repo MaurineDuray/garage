@@ -10,14 +10,15 @@
 {% block body %}
 
     <div class="container my-4">
-        <h1>Ajout d'une nouvelle voiture au garage</h1>
+        <h1 style="margin-bottom: 50px; margin-top: 30px; text-align:center;">Ajout d'une nouvelle voiture au garage</h1>
+        <p style="text-align:center;"><b>Entrez les données correspondant à la voiture que vous souhaitez vendre pour l'ajouter au showroom</b></p>
         {{form_start(myform)}}
-            <div class="container">
+            <div class="container" style="background-color:  rgba(255, 170, 22, 0.1); padding: 20px; border-radius: 20px;">
                 <div>
                     {{form_widget(myform)}}
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Création d'une annonce</button>
+            <button type="submit" class="btn btn-primary mt-3">Ajouter le véhicule au showroom</button>
         {{form_end(myform)}}
     </div>
 {% endblock %}

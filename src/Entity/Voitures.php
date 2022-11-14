@@ -35,22 +35,23 @@ class Voitures
     private ?string $image = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Vous devez renseigner le nombre de kilomètre du véhicule")]
+    #[Assert\Range(min: 1, max:200000,notInRangeMessage: "Vous devez renseigner le nombre de kilomètres du véhicule")]
     private ?int $km = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Vous devez renseigner le prix de vente du véhicule")]
+    #[Assert\Range(min: 5000, max:200000,notInRangeMessage: "Vous devez renseigner le prix de vente du véhicule")]
     private ?int $prix = null;
 
     #[ORM\Column]
+    #[Assert\Range(min: 1, max:10,notInRangeMessage: "Vous devez renseigner le nombre de propriétaire(s) du véhicule")]
     private ?int $nbProprio = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Vous devez renseigner le nombre de cylindres de la voiture")]
+    #[Assert\Range(min: 1, max:12,notInRangeMessage: "Vous devez renseigner le nombre de cylindres de la voiture (entre 1 et 12)")]
     private ?int $cylindree = null;
 
     #[ORM\Column]
-    #[Assert\NotBlank(message: "Vous devez renseigner la puissance du véhicule (n° chevaux)")]
+    #[Assert\Range(min: 1, max:1800,notInRangeMessage: "Vous devez renseigner le nombre de chevaux de la voiture (entre 1 et 1800)")]
     private ?int $puissance = null;
 
     #[ORM\Column(length: 255)]
@@ -58,11 +59,11 @@ class Voitures
     private ?string $carburant = null;
 
     #[ORM\Column(type: Types::INTEGER)]
-    #[Assert\Range(min: 1850, max:2030, notInRangeMessage: "Vous devez renseigner l'année de mise en circulation du véhicule")]
+    #[Assert\Range(min: 1850, max:2030, notInRangeMessage: "Vous devez renseigner l'année de mise en circulation du véhicule (ex: 1998)")]
     private ?int $annee = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Vous devez renseigner si le voiture possède une boite manuelle ou automatique")]
+    #[Assert\NotBlank(message: "Vous devez renseigner le type de trnsmission du véhicule")]
     private ?string $transmission = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -70,6 +71,7 @@ class Voitures
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message: "Vous devez renseigner si le véhicule possède des options")]
     private ?string $options = null;
 
     #[ORM\Column(length: 255)]
