@@ -7,6 +7,7 @@ use App\Entity\Voitures;
 
 use App\Form\PicturesType;
 use App\Form\ApplicationType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -27,7 +28,23 @@ class VoituresType extends ApplicationType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('marque',TextType::class, $this->getConfiguration('Marque du véhicule', "Marque du véhicule"))
+            ->add('marque',ChoiceType::class,[
+                'label'=>'Marque du véhicule',
+                'required'=>'true',
+                'placeholder'=>"Choisissez la marque du véhicule",
+                'choices'=>[
+                    "Renault"=>"Renault",
+                    "Peugeot"=>"Peugeot",
+                    "Opel"=>"Opel",
+                    "Fiat"=>"Fiat",
+                    "Mercedes"=>"Mercedes",
+                    "Jaguar"=>"Jaguar",
+                    "Skoda"=>"Skoda",
+                    "Cadillac"=>"Cadillac",
+                    "Ford"=>"Ford"
+                    ]
+                    ],  
+                    )
             ->add('modele',TextType::class, $this->getConfiguration('Modèle du véhicule', "Modèle du véhicule"))
             ->add('image', FileType::class,[
                 'label'=>"Image de couverture (jpg, jpeg, png)",
@@ -37,11 +54,29 @@ class VoituresType extends ApplicationType
             ->add('nbProprio',IntegerType::class,$this->getConfiguration('Nombre de proprio', "Donnez le nombre de prorio qui ont eu le véhicule"))
             ->add('cylindree',IntegerType::class,$this->getConfiguration('Nombre de cylindres', "Donnez le nombre de cylindres (de 1 à 4)"))
             ->add('puissance',IntegerType::class,$this->getConfiguration('Nombre de chevaux', "Donnez le nombre de cheveaux du véhicule (max:200)"))
-            ->add('carburant',TextType::class, $this->getConfiguration('Carburant', "Carburant accepté par le véhicule"))
+            ->add('carburant',ChoiceType::class,[
+                'label'=>'Carburant du véhicule',
+                'required'=>'true',
+                'placeholder'=>"Choisissez le carburant du véhicule",
+                'choices'=>[
+                        "Essence"=>"Essence",
+                        "Diesel"=>"Diesel",
+                        "Electrique"=>"Electrique"
+                        ]
+                        ],  
+                    )
             ->add('annee',IntegerType::class,$this->getConfiguration('Année de mise en circulation', "Donnez l'année de mise en circulation du véhicule"))
-            ->add('transmission',TextType::class, $this->getConfiguration('Transmission', "Donnez le type de transmission du véhicule: automatique, manuelle"))
+            ->add('transmission',ChoiceType::class,[
+                'label'=>'Transmission du véhicule',
+                'required'=>'true',
+                'placeholder'=>"Choisissez la transmission du véhicule",
+                'choices'=>[
+                        "Manuelle"=>"Manuelle",
+                        "Automatique"=>"Automatique"
+                        ],  
+                    ])
             ->add('description',TextType::class, $this->getConfiguration('Description', "Donnez une description du véhicule"))
-            ->add('options',TextType::class, $this->getConfiguration('options', "Listez les options du véhicule"),)
+            ->add('options',TextType::class, $this->getConfiguration('Options du véhicule', "Listez les options du véhicule"),)
             ->add('slug', TextType::class, $this->getConfiguration('Slug', 'Adresse web (automatique)',[
                 'required' => false
             ]))

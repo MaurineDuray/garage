@@ -58,7 +58,7 @@ class Voitures
     private ?string $carburant = null;
 
     #[ORM\Column(type: Types::INTEGER)]
-    #[Assert\NotBlank(message: "Vous devez renseigner l'année de mise en circulation du véhicule")]
+    #[Assert\Range(min: 1850, max:2030, notInRangeMessage: "Vous devez renseigner l'année de mise en circulation du véhicule")]
     private ?int $annee = null;
 
     #[ORM\Column(length: 255)]
