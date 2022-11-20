@@ -50,10 +50,10 @@ class VoituresType extends ApplicationType
                 'label'=>"Image de couverture (jpg, jpeg, png)",
             ])
             ->add('km',IntegerType::class,$this->getConfiguration('Nombre de kilomètres', "Donnez le nombre de kilomètres au compteur"))
-            ->add('prix', MoneyType::class,$this->getConfiguration('Prix', "Donnez le prix du véhicule"))
-            ->add('nbProprio',IntegerType::class,$this->getConfiguration('Nombre de proprio', "Donnez le nombre de prorio qui ont eu le véhicule"))
-            ->add('cylindree',IntegerType::class,$this->getConfiguration('Nombre de cylindres', "Donnez le nombre de cylindres (de 1 à 4)"))
-            ->add('puissance',IntegerType::class,$this->getConfiguration('Nombre de chevaux', "Donnez le nombre de cheveaux du véhicule (max:200)"))
+            ->add('prix', MoneyType::class,$this->getConfiguration('Prix (minimum: 5000 €)', "Donnez le prix du véhicule"))
+            ->add('nbProprio',IntegerType::class,$this->getConfiguration('Nombre de propriétaires', "Donnez le nombre de propriétaires qui ont eu le véhicule"))
+            ->add('cylindree',IntegerType::class,$this->getConfiguration('Nombre de cylindres (de 1 à 12)', "Donnez le nombre de cylindres (de 1 à 12)"))
+            ->add('puissance',IntegerType::class,$this->getConfiguration('Nombre de chevaux (max:200)', "Donnez le nombre de cheveaux du véhicule (max:200)"))
             ->add('carburant',ChoiceType::class,[
                 'label'=>'Carburant du véhicule',
                 'required'=>'true',
