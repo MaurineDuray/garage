@@ -22,6 +22,7 @@ class Voitures
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Vous devez renseigner la marque véhicule")]
     #[Assert\Length(min:2, max:50, minMessage: "La marque doit faire plus de 2 caractères", maxMessage:'Le titre ne doit pas faire plus de 50 caractères ')]
     private ?string $marque = null;
 
