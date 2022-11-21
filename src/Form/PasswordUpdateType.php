@@ -10,6 +10,13 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class PasswordUpdateType extends ApplicationType
 {
+    /**
+     * Création du formulaire pour le changement de mot de passe 
+     *
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

@@ -12,6 +12,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class AccountType extends ApplicationType
 {
+    /**
+     * Création du formulaire de création d'un compte 
+     *
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

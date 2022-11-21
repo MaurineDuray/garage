@@ -86,7 +86,11 @@ class Voitures
         $this->pictures = new ArrayCollection();
     }
 
-
+    /**
+     * Initialisation automatique du slug 
+     *
+     * @return void
+     */
     #[ORM\PrePersist]
     #[ORM\PreUpdate]
     public function initializeSlug():void{

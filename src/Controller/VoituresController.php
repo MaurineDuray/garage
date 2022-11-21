@@ -17,7 +17,12 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class VoituresController extends AbstractController
 {
-    /**Afficher l'ensemble des voitures du showroom*/
+    /**
+     * Affiche l'ensemble des voitures du showroom
+     *
+     * @param VoituresRepository $repo
+     * @return Response
+     */
     #[Route('/showroom', name: 'voitures_showroom')]
     public function index(VoituresRepository $repo): Response
     {
