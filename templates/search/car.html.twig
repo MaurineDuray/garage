@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Recherche
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<div class="col m6 offset-m3">
+				<h1>Votre recherche</h1>
+				{{form_start(search)}}
+
+				{{form_end(search)}}
+			</div>
+
+		</div>
+		{% if app.request.method =='POST' %}
+			<div class="row">
+				<div class="col m6 offset-m3">
+					{% if voitures | length == 0 %}
+						<h2>Il n'y a pas de résultats</h2>
+					{% else %}
+						<h2>Résultats de la recherche</h2>
+						{% for voiture in voitures %}
+							<div class="col-md-6">
+								<div class="cartes card bg-light mb-3">
+
+									{% set url = path('voitures_show', {'slug':voiture.slug}) %}
+									<div class="vignette">
+										<img class=" starsimg" src="../uploads/{{voiture.image}}" alt="image de l'annonce {{voiture.marque}} {{voiture.modele}}">
+									</div>
+								</a>
+								<div class="card-body text-center">
+									{{voiture.marque}}
+									<br><strong>
+										<i>{{voiture.modele}}</i>
+									</strong>
+									<br>Kilométrage :
+									{{voiture.km}}
+									KM
+									<br><div class="prix">{{voiture.prix}}
+										€</div>
+									<br>
+									<a href="{{url}}" id="enplus" class="btn btn-dark">
+										En savoir plus
+									</a>
+								</div>
+
+
+							</div>
+						</div>
+					{% endfor %}
+				{% endif %}
+
+
+			</div>
+		</div>
+	{% endif %}
+</div>{% endblock %}

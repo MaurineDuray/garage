@@ -27,51 +27,7 @@
 			<h2 style="text-align:center">- Bonne visite sur notre showroom online ! -
 			</h2>
 
-			{{form_widget(form)}}
 
-
-			{% if app.request.method == 'POST' %}
-				// si il y a des résultats pour la recherche
-				<div>
-					{% if voitures | length == 0 %}
-						<h4>Aucun résulat pour votre recherche.</h4>
-					{% else %}
-						<h3 class="mt-3">Vos résulats de recherche :</h3>
-						{% for voiture in voitures %}
-							<div class="col-md-6">
-								<div class="cartes card bg-light mb-3">
-
-
-									{% set url = path('voitures_show', {'slug':voiture.slug}) %}
-									<div class="vignette">
-										<img class=" starsimg" src="../uploads/{{voiture.image}}" alt="image de l'annonce {{voiture.marque}} {{voiture.modele}}">
-									</div>
-								</a>
-								<div class="card-body text-center">
-									{{voiture.marque}}
-									<br><strong>
-										<i>{{voiture.modele}}</i>
-									</strong>
-									<br>Kilométrage :
-									{{voiture.km}}
-									KM
-									<br><div class="prix">{{voiture.prix}}
-										€</div>
-									<br>
-									<a href="{{url}}" id="enplus" class="btn btn-dark">
-										En savoir plus
-									</a>
-								</div>
-
-
-							</div>
-						</div>
-					{% endfor %}
-				</div>
-			{% endif %}
-
-		{% else %}
-			{# //si pas de recherches #}
 			<div
 				class="row">
 
@@ -107,5 +63,6 @@
 				</div>
 			{% endfor %}
 		</div>
-	{% endif %}
-</div></div>{% endblock %}
+
+	</div>
+</div>{% endblock %}

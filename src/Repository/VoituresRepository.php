@@ -58,20 +58,18 @@ class VoituresRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-    //    /**
-    //     * @return Voitures[] Returns an array of Voitures objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('v')
-    //            ->andWhere('v.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('v.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    /**
+     * @return Voitures[] Returns an array of Voitures objects
+     */
+    public function searchCar($criteria): array
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.modele = :modele')
+            ->setParameter('modele', $criteria)
+
+            ->getQuery()
+            ->getResult();
+    }
 
     //    public function findOneBySomeField($value): ?Voitures
     //    {

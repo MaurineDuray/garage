@@ -22,24 +22,7 @@ class VoituresController extends AbstractController
 {
 
 
-    /**
-     * Recherche
-     *
-     * @param Request $request
-     * @param VoituresRepository $repo
-     * @return void
-     */
-    #[Route('/handleSearch', name: 'handleSearch')]
-    public function handleSearch(Request $request, VoituresRepository $repo)
-    {
-        $query = $request->request->all('form')['query'];
-        if ($query) {
-            $voitures = $repo->findArticlesByName($query);
-        }
-        return $this->render('voitures/index.html.twig', [
-            'voitures' => $voitures
-        ]);
-    }
+
 
     /**
      * Affiche l'ensemble des voitures du showroom
@@ -52,25 +35,11 @@ class VoituresController extends AbstractController
     {
         $voitures = $repo->findAll();
 
-        $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl('handleSearch'))
-            ->add('query', TextType::class, [
-                'label' => false,
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Entrez un mot-clé'
-                ]
-            ])
-            ->add('recherche', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ]
-            ])
-            ->getForm();
+
 
         return $this->render('voitures/index.html.twig', [
             'voitures' => $voitures,
-            'form' => $form->createView()
+
         ]);
     }
 
