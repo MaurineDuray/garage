@@ -24,26 +24,50 @@ class VoituresController extends AbstractController
 
 
 
+    // /**
+    //  * Affiche l'ensemble des voitures du showroom sans recherche
+    //  *
+    //  * @param VoituresRepository $repo
+    //  * @return Response
+    //  */
+    // #[Route('/showroom', name: 'voitures_showroom')]
+    // public function index(VoituresRepository $repo): Response
+    // {
+    //     $voitures = $repo->findAll();
+
+
+
+    //     return $this->render('voitures/index.html.twig', [
+    //         'voitures' => $voitures,
+
+    //     ]);
+    // }
+
     /**
-     * Affiche l'ensemble des voitures du showroom
+     * Page d'accueil avec barre de recherche
      *
-     * @param VoituresRepository $repo
+     * @param Request $request
+     * @param VoituresRepository $voituresRepository
      * @return Response
      */
-    #[Route('/showroom', name: 'voitures_showroom')]
-    public function index(VoituresRepository $repo): Response
+    #[Route('showroom/', name: 'voitures_showroom')]
+    public function searchCar(Request $request, VoituresRepository $voituresRepository): Response
     {
-        $voitures = $repo->findAll();
+        $searchForm = $this->createForm(SearchType::class);
+        $voitures = [];
 
-
+        if ($searchForm->handleRequest($request)->isSubmitted() && $searchForm->isValid()) {
+            $criteria = $searchForm['search']->getData();
+            $voitures = $voituresRepository->findVoitures($criteria);
+        } else {
+            $voitures = $voituresRepository->findAll();
+        }
 
         return $this->render('voitures/index.html.twig', [
-            'voitures' => $voitures,
-
+            'search' => $searchForm->createView(),
+            'voitures' => $voitures
         ]);
     }
-
-
 
     /**
      * Permet d'afficher le formulaire de création de l'ajout d'un véhicule au showroom

@@ -26,43 +26,51 @@
 		<div class="container">
 			<h2 style="text-align:center">- Bonne visite sur notre showroom online ! -
 			</h2>
+			{{form_start(search)}}
+			{{form_end(search)}}
 
 
-			<div
-				class="row">
+			{% if voitures | length > 0 %}
 
-				{# j'affiche toutes les voitures du showroom #}
-				{% for voiture in voitures %}
-					<div class="col-md-6">
-						<div class="cartes card bg-light mb-3">
+				<div
+					class="row">
+
+					{# j'affiche toutes les voitures du showroom #}
+					{% for voiture in voitures %}
+						<div class="col-md-6">
+							<div class="cartes card bg-light mb-3">
 
 
-							{% set url = path('voitures_show', {'slug':voiture.slug}) %}
-							<div class="vignette">
-								<img class=" starsimg" src="../uploads/{{voiture.image}}" alt="image de l'annonce {{voiture.marque}} {{voiture.modele}}">
-							</div>
-						</a>
-						<div class="card-body text-center">
-							{{voiture.marque}}
-							<br><strong>
-								<i>{{voiture.modele}}</i>
-							</strong>
-							<br>Kilométrage :
-							{{voiture.km}}
-							KM
-							<br><div class="prix">{{voiture.prix}}
-								€</div>
-							<br>
-							<a href="{{url}}" id="enplus" class="btn btn-dark">
-								En savoir plus
+								{% set url = path('voitures_show', {'slug':voiture.slug}) %}
+								<div class="vignette">
+									<img class=" starsimg" src="../uploads/{{voiture.image}}" alt="image de l'annonce {{voiture.marque}} {{voiture.modele}}">
+								</div>
 							</a>
+							<div class="card-body text-center">
+								{{voiture.marque}}
+								<br><strong>
+									<i>{{voiture.modele}}</i>
+								</strong>
+								<br>Kilométrage :
+								{{voiture.km}}
+								KM
+								<br><div class="prix">{{voiture.prix}}
+									€</div>
+								<br>
+								<a href="{{url}}" id="enplus" class="btn btn-dark">
+									En savoir plus
+								</a>
+							</div>
+
+
 						</div>
-
-
 					</div>
-				</div>
-			{% endfor %}
-		</div>
+				{% endfor %}
+			</div>
+		{% else %}
+			<p>Il n'y a pas de résultats pour votre recherche</p>
+		{% endif %}
+
 
 	</div>
 </div>{% endblock %}

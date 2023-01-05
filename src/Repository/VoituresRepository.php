@@ -40,24 +40,26 @@ class VoituresRepository extends ServiceEntityRepository
     }
 
     // Find/search articles by title/content
-    public function findArticlesByName(string $query)
+    public function findVoitures(string $criteria)
     {
         $qb = $this->createQueryBuilder('p');
         $qb
             ->where(
                 $qb->expr()->andX(
                     $qb->expr()->orX(
-                        $qb->expr()->like('p.marque', ':query')
-
+                        $qb->expr()->like('p.marque', ':criteria'),
+                        $qb->expr()->like('p.modele', ':criteria'),
+                        $qb->expr()->like('p.carburant', ':criteria')
                     ),
 
                 )
             )
-            ->setParameter('query', '%' . $query . '%');
+            ->setParameter('criteria', '%' . $criteria . '%');
         return $qb
             ->getQuery()
             ->getResult();
     }
+
     /**
      * @return Voitures[] Returns an array of Voitures objects
      */
@@ -70,6 +72,22 @@ class VoituresRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+
+    //    /**
+    //     * @return Voitures[] Returns an array of Voitures objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('v')
+    //            ->andWhere('v.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('v.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
     //    public function findOneBySomeField($value): ?Voitures
     //    {

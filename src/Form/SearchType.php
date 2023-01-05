@@ -18,12 +18,12 @@ class SearchType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'Entrez un mot-clé'
+                    'placeholder' => 'Rechercher une voiture par sa marque, son modèle, son carburant'
                 ]
             ])
             ->add('rechercher', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-primary'
+                    'class' => 'btn btn-warning'
                 ]
             ]);
     }
