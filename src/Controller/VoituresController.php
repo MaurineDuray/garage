@@ -6,9 +6,10 @@ use App\Entity\Pictures;
 use App\Entity\Voitures;
 use App\Form\SearchType;
 use App\Form\VoituresType;
+use App\Service\PaginationService;
 use App\Repository\VoituresRepository;
-use Doctrine\ORM\EntityManagerInterface;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,9 +21,6 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class VoituresController extends AbstractController
 {
-
-
-
 
     // /**
     //  * Affiche l'ensemble des voitures du showroom sans recherche
@@ -43,6 +41,33 @@ class VoituresController extends AbstractController
     //     ]);
     // }
 
+
+    // /**
+    //  * Page d'accueil avec barre de recherche
+    //  *
+    //  * @param Request $request
+    //  * @param VoituresRepository $voituresRepository
+    //  * @return Response
+    //  */
+    // #[Route('/showroom/{page<\d+>?1}', name: 'voitures_showroom')]
+    // public function searchCar(Request $request, VoituresRepository $voituresRepository): Response
+    // {
+    //     $searchForm = $this->createForm(SearchType::class);
+    //     $voitures = [];
+
+    //     if ($searchForm->handleRequest($request)->isSubmitted() && $searchForm->isValid()) {
+    //         $criteria = $searchForm['search']->getData();
+    //         $voitures = $voituresRepository->findVoitures($criteria);
+    //     } else {
+    //         $voitures = $voituresRepository->findAll();
+    //     }
+    //     return $this->render('voitures/index.html.twig', [
+    //         'search' => $searchForm->createView(),
+    //         'voitures' => $voitures,
+
+    //     ]);
+    // }
+
     /**
      * Page d'accueil avec barre de recherche
      *
@@ -50,24 +75,42 @@ class VoituresController extends AbstractController
      * @param VoituresRepository $voituresRepository
      * @return Response
      */
-    #[Route('showroom/', name: 'voitures_showroom')]
-    public function searchCar(Request $request, VoituresRepository $voituresRepository): Response
+    #[Route('/showroom/{page<\d+>?1}', name: 'voitures_showroom')]
+    public function searchCar(Request $request, PaginationService $pagination, $page, VoituresRepository $repo): Response
     {
+
+
         $searchForm = $this->createForm(SearchType::class);
-        $voitures = [];
+
+
 
         if ($searchForm->handleRequest($request)->isSubmitted() && $searchForm->isValid()) {
             $criteria = $searchForm['search']->getData();
-            $voitures = $voituresRepository->findVoitures($criteria);
+            $voitures = $repo->findVoitures($criteria);
+
+            return $this->render('voitures/index.html.twig', [
+                'search' => $searchForm->createView(),
+                'pagination' => $pagination,
+                'voitures'=>$voitures
+            ]);
+
         } else {
-            $voitures = $voituresRepository->findAll();
+            $pagination->setEntityClass(Voitures::class)
+                ->setPage($page)
+                ->setLimit(6);
+
+                return $this->render('voitures/index.html.twig', [
+                    'search' => $searchForm->createView(),
+                    'pagination' => $pagination,
+                   
+                ]);
         }
 
-        return $this->render('voitures/index.html.twig', [
-            'search' => $searchForm->createView(),
-            'voitures' => $voitures
-        ]);
+
+
+        
     }
+
 
     /**
      * Permet d'afficher le formulaire de création de l'ajout d'un véhicule au showroom
